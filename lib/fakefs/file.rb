@@ -16,6 +16,9 @@ module FakeFS
 
     class << self
       alias_method :exists?, :exist?
+
+      # Assuming that everyone can read files
+      alias_method :readable?, :exist?
     end
 
     def self.size(path)

@@ -94,6 +94,7 @@ class FakeFSTest < Test::Unit::TestCase
     end
 
     assert File.exists?(path)
+    assert File.readable?(path)
   end
 
   def test_can_read_files_once_written
