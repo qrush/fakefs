@@ -101,6 +101,14 @@ module FakeFS
       read(path).split("\n")
     end
 
+    def self.mtime(path)
+      if exists?(path)
+        FileSystem.find(path).mtime
+      else
+        raise Errno::ENOENT
+      end
+    end
+
     attr_reader :path
     def initialize(path, mode = nil, perm = nil)
       @path = path

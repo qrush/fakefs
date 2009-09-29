@@ -1,11 +1,12 @@
 module FakeFS
   class FakeFile
-    attr_accessor :name, :parent, :content
+    attr_accessor :name, :parent, :content, :mtime
 
     def initialize(name = nil, parent = nil)
       @name = name
       @parent = parent
       @content = ''
+      @mtime = Time.now
     end
 
     def clone(parent = nil)
