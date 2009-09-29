@@ -115,15 +115,20 @@ module FakeFS
       @mode = mode
       @file = FileSystem.find(path)
       @open = true
+      @stream = StringIO.new(@file.content) if @file
     end
 
     def close
       @open = false
     end
 
-    def read
+    def read(chunk = nil)
       raise IOError.new('closed stream') unless @open
-      @file.content
+      @stream.read(chunk)
+    end
+
+    def rewind
+      @stream.rewind
     end
 
     def exists?
