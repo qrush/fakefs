@@ -1,6 +1,3 @@
-require 'rubygems'
-require 'timecop'
-
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'fakefs'
 require 'test/unit'
@@ -162,13 +159,11 @@ class FakeFSTest < Test::Unit::TestCase
   end
 
   def test_can_return_mtime_on_existing_file
-    Timecop.freeze do
-      path = '/path/to/file.txt'
-      File.open(path, 'w') do |f|
-        f << ''
-      end
-      assert_equal Time.now, File.mtime('/path/to/file.txt')
+    path = '/path/to/file.txt'
+    File.open(path, 'w') do |f|
+      f << ''
     end
+    assert File.mtime('/path/to/file.txt').is_a?(Time)
   end
 
   def test_can_read_with_File_readlines
